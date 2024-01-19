@@ -10,13 +10,13 @@ const Slider = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
   /* Inversement des valeurs dans la condition, initialement -1 : 1 pour obtenir l'odre décroissant */
     new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
-  );
+  )
   const nextCard = () => {
-    setTimeout(
-      /* Ajout de -1 pour que la taille du tableau corresonde bien à l'indice actuel */
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      5000
-    );
+    setTimeout(() => {
+      if (byDateDesc && byDateDesc.length > 0) {
+        setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
+      }
+    }, 5000);
   };
   useEffect(() => {
     nextCard();
