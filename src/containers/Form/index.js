@@ -12,6 +12,7 @@ const Form = ({ onSuccess, onError }) => {
     async (evt) => {
       evt.preventDefault();
       setSending(true);
+      // Appel onSuccess() pour effectuer le test du fetch //
       onSuccess();
       try {
         await mockContactApi();
