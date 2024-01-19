@@ -14,21 +14,27 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Calcul de l'indice de début de la pagination
   const startIdx = (currentPage - 1) * perPage;
+  // Calcul de l'indice de fin de la pagination
   const endIdx = currentPage * perPage;
 
+  // Filtrage des événements en fonction du type sélectionné
   const filteredEvents =
     (type
       ? data?.events.filter((event) => event.type === type)
       : data?.events) || [];
 
+  // Sélection des événements pour la page actuelle
   const paginatedEvents = filteredEvents.slice(startIdx, endIdx);
 
   const changeType = (evtType) => {
+    // Réinitialisation de la page lorsqu'un nouveau type est sélectionné
     setCurrentPage(1);
     setType(evtType);
   };  
 
+  // Calcul du nombre de pages nécessaires avec Math.ceil
   const pageNumber = Math.ceil(filteredEvents.length / perPage);
   const typeList = new Set(data?.events.map((event) => event.type));
 
