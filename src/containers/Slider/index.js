@@ -44,11 +44,12 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={event.id}
                   type="radio"
                   name="radio-button"
                   /* Syntaxe modifiée idx en index */
                   checked={index === radioIdx}
+                  readOnly
                 />
               ))}
             </div>
