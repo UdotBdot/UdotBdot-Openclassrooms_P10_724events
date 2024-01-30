@@ -13,5 +13,11 @@ describe("Date helper", () => {
       const result = getMonth(date);
       expect(result).toEqual("juillet");
     });
+    it("should return 'décembre' for the date 2022-12-15", () => {
+      const date = new Date("2022-12-15");
+      const result = getMonth(date);
+      expect(result).toEqual("décembre");
+    });
+    
   });
 });
