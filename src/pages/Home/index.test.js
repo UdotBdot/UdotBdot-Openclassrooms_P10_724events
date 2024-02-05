@@ -318,7 +318,6 @@ describe("When Form is created", () => {
 
 });
 
-
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     // to implement
@@ -341,18 +340,15 @@ describe("When a page is created", () => {
     expect(screen.getByText("Notre dernière prestation")).toBeInTheDocument();
     expect(screen.getByText("Contactez-nous")).toBeInTheDocument();
   })
-  it("an event card, with the last event, is displayed", () => {
+  it("an event card, with the last event, is displayed", async () => {
     window.console.error = jest.fn();
     api.loadData = jest.fn().mockReturnValue(data);
+    render(<Home />);
     const events = data?.events;
     const sortedEvents = events?.sort((evtA, evtB) =>
       new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
     );
     const last = sortedEvents?.[0];
-    for (let i = 0; i < sortedEvents.length - 1; i++) {
-        const currentDate = new Date(sortedEvents[i].date).getTime();
-        const nextDate = new Date(sortedEvents[i + 1].date).getTime();
-        expect(currentDate).toBeGreaterThanOrEqual(nextDate);
-      }
+    expect(last.title).toBe("Conférence #productCON");
   })
 });
