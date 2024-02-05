@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
+import { api } from "../../contexts/DataContext";
 
 const data = {
   "events": [
@@ -327,8 +328,10 @@ describe("When a page is created", () => {
     await screen.findByText("Samira");
     await screen.findByText("Jean-baptiste");
     await screen.findByText("Alice");
+    await screen.findByText("Luís");
+    await screen.findByText("Christine");
+    await screen.findByText("Isabelle");
   });
-  
   it("a footer is displayed", () => {
     render(<Home />);
     // Vérifie si les éléments clés du footer sont présents
@@ -339,6 +342,17 @@ describe("When a page is created", () => {
     expect(screen.getByText("Contactez-nous")).toBeInTheDocument();
   })
   it("an event card, with the last event, is displayed", () => {
-    // to implement
+    window.console.error = jest.fn();
+    api.loadData = jest.fn().mockReturnValue(data);
+    const events = data?.events;
+    const sortedEvents = events?.sort((evtA, evtB) =>
+      new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
+    );
+    const last = sortedEvents?.[0];
+    for (let i = 0; i < sortedEvents.length - 1; i++) {
+        const currentDate = new Date(sortedEvents[i].date).getTime();
+        const nextDate = new Date(sortedEvents[i + 1].date).getTime();
+        expect(currentDate).toBeGreaterThanOrEqual(nextDate);
+      }
   })
 });
