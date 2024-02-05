@@ -16,6 +16,7 @@ const Slider = () => {
   const ImgFocus = data?.focus.length;
 
   const nextCard = () => {
+    /* Ajout de -1 pour que la taille du tableau corresonde bien à l'indice actuel */
     setTimeout(() => setIndex(index < ImgFocus - 1 ? index + 1 : 0), 5000);
   };
   useEffect(() => {
